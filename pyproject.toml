@@ -1,0 +1,101 @@
+[project]
+name = "blog"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Tes"}
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard] (>=0.129.0,<0.130.0)",
+    "uvicorn (>=0.41.0,<0.42.0)",
+    "psycopg2-binary (>=2.9.11,<3.0.0)",
+    "sqlalchemy (>=2.0.48,<3.0.0)",
+]
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.15.2,<0.16.0)",
+    "pytest (>=9.0.2,<10.0.0)",
+    "mypy (>=1.19.1,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle
+    "F",   # pyflakes
+    "W",   # warnings
+    "I",   # import sorting
+    "N",   # naming
+    "UP",  # python upgrades
+    "B",   # bugbear
+    "C4",  # comprehensions
+    "SIM", # simplification
+    "RET", # return rules
+    "ARG", # unused arguments
+    "PTH", # pathlib usage
+    "RUF", # Ruff rules
+]
+
+ignore = [
+    "E501","B008",
+]
+
+fixable = ["ALL"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+known-first-party = ["app"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ----------------------
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+strict_optional = true
+check_untyped_defs = true
+
+exclude = [
+    "tests/"
+]
+
+# ----------------------
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q --cov=app --cov-report=term-missing"
+python_files = ["test_*.py"]
+
+# ----------------------
+
+[tool.coverage.run]
+branch = true
+source = ["app"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
