@@ -15,7 +15,7 @@ class PostOperationDocs(TypedDict):
 
 # Extract common responses into separate constants:
 
-POST_NOT_FOUND_RESPONSE = {
+POST_NOT_FOUND_RESPONSE: dict[int | str, dict[str, Any]] = {
     404: {
         "description": "Post not found",
         "content": {
@@ -24,7 +24,7 @@ POST_NOT_FOUND_RESPONSE = {
     }
 }
 
-FORBIDDEN_RESPONSE = {
+FORBIDDEN_RESPONSE: dict[int | str, dict[str, Any]] = {
     403: {
         "description": "Not authorized",
         "content": {

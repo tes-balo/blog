@@ -1,0 +1,26 @@
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    database_url: str
+    database_url_sync: str
+    jwt_secret: str
+    jwt_algorithm: str
+    jwt_expiration_seconds: int
+
+    debug: bool = True
+    environment: str = "development"
+
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
+
+
+settings = Settings()  # type: ignore
+# SECRET_KEY
+
+# ALGORITHM
+
+# token expiry times
